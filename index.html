@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="艺术家雨荷（肖凤莲）官方网站。探索其以传统宋画精神融汇当代审美的艺术世界。"
+    />
+    <title>雨荷｜艺术家官方网站</title>
+    <style>
+      :root {
+        --ink: #193644;
+        --ink-deep: #102a35;
+        --ink-soft: #52717a;
+        --paper: #f6f1e6;
+        --paper-warm: #ebe1ce;
+        --cloud: #fcfaf5;
+        --vermilion: #ac4939;
+        --gold: #b99553;
+        --line: rgba(25, 54, 68, 0.16);
+        --serif: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", SimSun, serif;
+        --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.75;
+        overflow-x: hidden;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      ::selection { background: var(--vermilion); color: var(--cloud); }
+
+      .site-header {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 25px 5.5vw;
+        color: var(--cloud);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+
+      .wordmark {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        color: inherit;
+      }
+
+      .wordmark__seal {
+        display: grid;
+        width: 39px;
+        height: 39px;
+        place-items: center;
+        border: 1px solid rgba(255,255,255,.8);
+        font-family: var(--serif);
+        font-size: 22px;
+        letter-spacing: -2px;
+      }
+
+      .wordmark__name {
+        font-family: var(--serif);
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: .22em;
+      }
+
+      .wordmark__sub {
+        display: block;
+        margin-top: 0;
+        font-family: Georgia, serif;
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: .22em;
+        opacity: .78;
+      }
+
+      .desktop-nav { display: flex; gap: clamp(18px, 2.4vw, 42px); }
+      .desktop-nav a {
+        position: relative;
+        font-size: 13px;
+        letter-spacing: .13em;
+        opacity: .86;
+      }
+      .desktop-nav a::after {
+        position: absolute;
+        right: 0;
+        bottom: -7px;
+        left: 0;
+        height: 1px;
+        background: var(--cloud);
+        content: "";
+        opacity: 0;
+        transform: scaleX(0);
+        transition: .25s ease;
+      }
+      .desktop-nav a:hover { opacity: 1; }
+      .desktop-nav a:hover::after { opacity: 1; transform: scaleX(1); }
+
+      .menu-toggle {
+        display: none;
+        width: 43px;
+        height: 43px;
+        padding: 0;
+        border: 1px solid rgba(255,255,255,.7);
+        color: var(--cloud);
+        background: transparent;
+        cursor: pointer;
+      }
+      .menu-toggle span { display: block; width: 18px; height: 1px; margin: 5px auto; background: currentColor; }
+
+      .mobile-menu {
+        position: fixed;
+        z-index: 9;
+        inset: 0;
+        display: grid;
+        visibility: hidden;
+        place-items: center;
+        background: var(--ink-deep);
+        opacity: 0;
+        transition: opacity .25s ease, visibility .25s ease;
+      }
+      .mobile-menu.is-open { visibility: visible; opacity: 1; }
+      .mobile-menu nav { display: grid; gap: 24px; text-align: center; }
+      .mobile-menu a { color: var(--cloud); font-family: var(--serif); font-size: 30px; letter-spacing: .16em; }
+
+      .hero {
+        position: relative;
+        display: grid;
+        min-height: min(900px, 100svh);
+        grid-template-columns: minmax(0, 1fr) minmax(430px, 48vw);
+        overflow: hidden;
+        color: var(--cloud);
+        background: var(--ink-deep);
+      }
+
+      .hero::before {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(11,32,42,.93) 0%, rgba(16,42,53,.84) 39%, rgba(16,42,53,.13) 72%, rgba(16,42,53,.36) 100%);
+        content: "";
+        pointer-events: none;
+      }
+
+      .hero::after {
+        position: absolute;
+        z-index: 2;
+        top: 17%;
+        left: -130px;
+        width: 430px;
+        height: 430px;
+        border: 1px solid rgba(246,241,230,.19);
+        border-radius: 50%;
+        content: "";
+        pointer-events: none;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        max-width: 670px;
+        padding: clamp(154px, 19vh, 215px) 20px 78px max(5.5vw, calc((100vw - 1320px) / 2));
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin: 0 0 29px;
+        color: #d6bd86;
+        font-size: 11px;
+        letter-spacing: .3em;
+      }
+      .eyebrow::before { width: 36px; height: 1px; background: currentColor; content: ""; }
+
+      .hero h1 {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(68px, 10vw, 146px);
+        font-weight: 500;
+        letter-spacing: .19em;
+        line-height: 1;
+        text-indent: .19em;
+      }
+
+      .hero h1 small {
+        display: block;
+        margin: 23px 0 0;
+        color: #d8d3c7;
+        font-family: Georgia, serif;
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: .42em;
+        text-align: center;
+      }
+
+      .hero-description {
+        width: min(100%, 430px);
+        margin: 42px 0 0;
+        color: rgba(252,250,245,.78);
+        font-size: 14px;
+        letter-spacing: .08em;
+        line-height: 2.15;
+      }
+
+      .hero-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 17px;
+        width: max-content;
+        margin-top: 40px;
+        border-bottom: 1px solid rgba(252,250,245,.58);
+        padding: 0 0 10px;
+        color: var(--cloud);
+        font-size: 12px;
+        letter-spacing: .17em;
+        transition: color .25s ease, border-color .25s ease;
+      }
+      .hero-link span { font-size: 20px; line-height: .65; transition: transform .25s ease; }
+      .hero-link:hover { border-color: #d6bd86; color: #d6bd86; }
+      .hero-link:hover span { transform: translateX(5px); }
+
+      .hero-image-wrap { position: relative; z-index: 0; min-height: 600px; }
+      .hero-image-wrap::after {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10,30,41,.23) 0%, transparent 36%, rgba(9,29,38,.3) 100%);
+        content: "";
+      }
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 48% 28%;
+        filter: saturate(.84) contrast(1.02);
+      }
+
+      .scroll-cue {
+        position: absolute;
+        z-index: 4;
+        right: 5.5vw;
+        bottom: 37px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(252,250,245,.75);
+        font-size: 9px;
+        letter-spacing: .25em;
+        writing-mode: vertical-rl;
+      }
+      .scroll-cue::before { width: 1px; height: 43px; background: #d6bd86; content: ""; }
+
+      .section { position: relative; padding: clamp(80px, 10vw, 150px) 5.5vw; }
+      .section-inner { width: min(100%, 1320px); margin: 0 auto; }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin: 0 0 24px;
+        color: var(--vermilion);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .25em;
+      }
+      .section-label::before { width: 30px; height: 1px; background: currentColor; content: ""; }
+
+      .section-title {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(35px, 4.4vw, 64px);
+        font-weight: 500;
+        letter-spacing: .08em;
+        line-height: 1.28;
+      }
+
+      .intro {
+        overflow: hidden;
+        background: var(--cloud);
+      }
+      .intro::after {
+        position: absolute;
+        right: -115px;
+        bottom: -145px;
+        width: 410px;
+        height: 410px;
+        border: 1px solid rgba(82,113,122,.16);
+        border-radius: 50%;
+        content: "";
+      }
+      .intro-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(260px, .82fr) minmax(380px, 1.48fr);
+        gap: clamp(58px, 10vw, 160px);
+      }
+      .intro-aside { padding-top: 8px; }
+      .intro-aside .section-title { max-width: 330px; }
+      .intro-accent {
+        position: relative;
+        width: 114px;
+        height: 114px;
+        margin-top: 52px;
+      }
+      .intro-accent::before,
+      .intro-accent::after {
+        position: absolute;
+        border-radius: 50%;
+        content: "";
+      }
+      .intro-accent::before { inset: 0; border: 1px solid var(--gold); }
+      .intro-accent::after { top: 29px; left: 29px; width: 56px; height: 56px; background: var(--vermilion); }
+      .intro-copy { max-width: 750px; padding-top: 6px; }
+      .intro-copy > p:first-child {
+        margin-top: 0;
+        font-family: var(--serif);
+        font-size: clamp(20px, 2vw, 28px);
+        letter-spacing: .06em;
+        line-height: 1.8;
+      }
+      .intro-copy p { margin: 0 0 23px; color: #3f5960; font-size: 15px; }
+      .intro-copy strong { color: var(--ink); font-weight: 600; }
+
+      .practice { color: var(--cloud); background: var(--ink); overflow: hidden; }
+      .practice::before {
+        position: absolute;
+        top: -250px;
+        right: -200px;
+        width: 650px;
+        height: 650px;
+        border: 1px solid rgba(246,241,230,.11);
+        border-radius: 50%;
+        content: "";
+      }
+      .practice .section-label { color: #d6bd86; }
+      .practice .section-title { max-width: 560px; }
+      .practice-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; }
+      .practice-note { max-width: 350px; margin: 0 0 6px; color: rgba(252,250,245,.68); font-size: 14px; }
+      .practice-grid {
+        position: relative;
+        display: grid;
+        margin-top: clamp(45px, 6vw, 84px);
+        border-top: 1px solid rgba(246,241,230,.22);
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .practice-card {
+        min-height: 300px;
+        padding: 31px clamp(18px, 2.6vw, 42px);
+        border-right: 1px solid rgba(246,241,230,.22);
+        transition: background .3s ease;
+      }
+      .practice-card:first-child { border-left: 1px solid rgba(246,241,230,.22); }
+      .practice-card:hover { background: rgba(246,241,230,.08); }
+      .practice-number { display: block; color: #d6bd86; font-family: Georgia, serif; font-size: 12px; letter-spacing: .1em; }
+      .practice-card h3 { margin: 76px 0 17px; font-family: var(--serif); font-size: 28px; font-weight: 500; letter-spacing: .1em; }
+      .practice-card p { margin: 0; color: rgba(252,250,245,.65); font-size: 13px; line-height: 2; }
+
+      .timeline { background: var(--paper); }
+      .timeline-head { display: grid; grid-template-columns: minmax(220px, .82fr) minmax(420px, 1.48fr); gap: clamp(58px, 10vw, 160px); }
+      .timeline-summary { margin: 7px 0 0; color: var(--ink-soft); font-size: 15px; }
+      .timeline-list { margin: clamp(50px, 7vw, 100px) 0 0; }
+      .timeline-item {
+        display: grid;
+        padding: 28px 0;
+        border-top: 1px solid var(--line);
+        grid-template-columns: 16% 29% 1fr;
+        gap: 15px;
+        transition: padding .25s ease, background .25s ease;
+      }
+      .timeline-item:last-child { border-bottom: 1px solid var(--line); }
+      .timeline-item:hover { margin: 0 -22px; padding-right: 22px; padding-left: 22px; background: rgba(255,255,255,.46); }
+      .timeline-year { color: var(--vermilion); font-family: Georgia, serif; font-size: 15px; letter-spacing: .05em; }
+      .timeline-event { font-family: var(--serif); font-size: 19px; letter-spacing: .04em; line-height: 1.6; }
+      .timeline-detail { color: var(--ink-soft); font-size: 13px; line-height: 1.9; }
+
+      .honors { padding-top: 0; background: var(--paper); }
+      .honors-panel {
+        position: relative;
+        display: grid;
+        overflow: hidden;
+        min-height: 410px;
+        padding: clamp(44px, 6vw, 82px);
+        color: var(--cloud);
+        background: var(--vermilion);
+        grid-template-columns: minmax(250px, .82fr) minmax(400px, 1.48fr);
+        gap: clamp(50px, 8vw, 130px);
+      }
+      .honors-panel::before {
+        position: absolute;
+        top: -190px;
+        right: -110px;
+        width: 520px;
+        height: 520px;
+        border: 1px solid rgba(252,250,245,.28);
+        border-radius: 50%;
+        content: "";
+      }
+      .honors-panel::after {
+        position: absolute;
+        right: 74px;
+        bottom: -45px;
+        width: 270px;
+        height: 270px;
+        border: 1px solid rgba(252,250,245,.23);
+        content: "";
+        transform: rotate(45deg);
+      }
+      .honors-panel > * { position: relative; z-index: 1; }
+      .honors-panel .section-label { color: #f7d99f; }
+      .honors-panel .section-title { max-width: 350px; }
+      .honors-list { display: grid; align-content: start; gap: 0; margin: 5px 0 0; padding: 0; list-style: none; }
+      .honors-list li { padding: 13px 0; border-bottom: 1px solid rgba(252,250,245,.27); font-family: var(--serif); font-size: clamp(16px, 1.45vw, 20px); letter-spacing: .04em; }
+
+      .closing { background: var(--cloud); text-align: center; }
+      .closing-mark { display: grid; width: 67px; height: 67px; margin: 0 auto 32px; place-items: center; border: 1px solid var(--vermilion); color: var(--vermilion); font-family: var(--serif); font-size: 37px; }
+      .closing h2 { max-width: 700px; margin: 0 auto; font-family: var(--serif); font-size: clamp(31px, 4.2vw, 59px); font-weight: 500; letter-spacing: .1em; line-height: 1.5; }
+      .closing p { max-width: 520px; margin: 27px auto 0; color: var(--ink-soft); font-size: 14px; }
+
+      .site-footer { padding: 28px 5.5vw; color: rgba(252,250,245,.68); background: var(--ink-deep); }
+      .footer-inner { display: flex; width: min(100%, 1320px); margin: 0 auto; align-items: center; justify-content: space-between; gap: 20px; }
+      .footer-brand { font-family: var(--serif); font-size: 17px; letter-spacing: .2em; }
+      .footer-copy { font-size: 11px; letter-spacing: .08em; text-align: right; }
+
+      .reveal { opacity: 0; transform: translateY(25px); transition: opacity .7s ease, transform .7s ease; }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 860px) {
+        .site-header { padding: 20px 6vw; }
+        .desktop-nav { display: none; }
+        .menu-toggle { display: block; }
+        .hero { grid-template-columns: 1fr; min-height: 810px; }
+        .hero::before { background: linear-gradient(180deg, rgba(10,29,38,.8) 0%, rgba(10,30,40,.54) 30%, rgba(10,30,40,.91) 81%, rgba(10,30,40,.98) 100%); }
+        .hero-copy { z-index: 3; padding: 150px 8vw 52px; justify-content: flex-end; }
+        .hero-description { margin-top: 28px; }
+        .hero-link { margin-top: 25px; }
+        .hero-image-wrap { position: absolute; inset: 0; min-height: 0; }
+        .hero-image { object-position: 50% 26%; }
+        .scroll-cue { right: 6vw; bottom: 27px; }
+        .intro-grid, .timeline-head, .honors-panel { grid-template-columns: 1fr; gap: 34px; }
+        .intro-accent { display: none; }
+        .practice-head { display: block; }
+        .practice-note { margin: 20px 0 0; }
+        .practice-grid { grid-template-columns: 1fr 1fr; }
+        .practice-card:nth-child(3) { border-left: 1px solid rgba(246,241,230,.22); }
+        .timeline-item { grid-template-columns: 75px 1fr; gap: 8px 16px; }
+        .timeline-detail { grid-column: 2; }
+        .honors-panel { min-height: auto; }
+      }
+
+      @media (max-width: 540px) {
+        .wordmark__name { font-size: 18px; }
+        .wordmark__seal { width: 34px; height: 34px; font-size: 19px; }
+        .hero { min-height: 760px; }
+        .hero h1 { font-size: 68px; }
+        .hero h1 small { font-size: 9px; }
+        .eyebrow { margin-bottom: 23px; }
+        .hero-description { font-size: 13px; }
+        .section { padding-right: 6vw; padding-left: 6vw; }
+        .intro-copy > p:first-child { font-size: 19px; }
+        .practice-grid { grid-template-columns: 1fr; }
+        .practice-card, .practice-card:nth-child(3) { min-height: 225px; border-left: 1px solid rgba(246,241,230,.22); }
+        .practice-card h3 { margin-top: 43px; }
+        .timeline-item { grid-template-columns: 58px 1fr; padding: 22px 0; }
+        .timeline-event { font-size: 17px; }
+        .timeline-item:hover { margin: 0 -10px; padding-right: 10px; padding-left: 10px; }
+        .honors-panel { padding: 42px 28px; }
+        .site-footer { padding: 23px 6vw; }
+        .footer-inner { display: block; }
+        .footer-copy { margin-top: 6px; text-align: left; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="#top" aria-label="雨荷首页">
+          <span class="wordmark__seal">雨荷</span>
+          <span class="wordmark__name">雨荷 <span class="wordmark__sub">YUHE · ARTIST</span></span>
+        </a>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#about">艺术家</a>
+          <a href="#practice">艺术语言</a>
+          <a href="#timeline">艺术履历</a>
+          <a href="#honors">荣誉</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-label="打开导航" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-menu" aria-hidden="true">
+      <nav aria-label="移动端导航">
+        <a href="#about">艺术家</a>
+        <a href="#practice">艺术语言</a>
+        <a href="#timeline">艺术履历</a>
+        <a href="#honors">荣誉</a>
+      </nav>
+    </div>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">中国画艺术家 · 北京</p>
+          <h1 id="hero-title">雨荷<small>YUHE · XIAO FENGLIAN</small></h1>
+          <p class="hero-description">以宋画精神为根，以当代审美为境。在工笔的精微与山水的阔远之间，铺展一方雅正而灵动的东方意境。</p>
+          <a class="hero-link" href="#about">走近艺术家 <span>→</span></a>
+        </div>
+        <div class="hero-image-wrap">
+          <img class="hero-image" src="yuhe-portrait.jpg" alt="艺术家雨荷肖像" />
+        </div>
+        <div class="scroll-cue" aria-hidden="true">向下阅览</div>
+      </section>
+
+      <section class="section intro" id="about" aria-labelledby="about-title">
+        <div class="section-inner intro-grid">
+          <div class="intro-aside reveal">
+            <p class="section-label">ARTIST PROFILE</p>
+            <h2 class="section-title" id="about-title">笔墨载道<br />心境成画</h2>
+            <div class="intro-accent" aria-hidden="true"></div>
+          </div>
+          <div class="intro-copy reveal">
+            <p><strong>肖凤莲，笔名雨荷，号杜葵。</strong>祖籍山东，现居北京；北宋山水名家李成后裔，海上画派传承人。</p>
+            <p>雨荷自幼研习国画，兼及宫廷画、山水、花鸟、工笔人物及油画多个门类。其绘画上承宫廷画派笔墨，亦取北宗山水之雄浑气象：工笔细腻雅致，山水意境阔远，花鸟秀逸灵动。</p>
+            <p>在传统宋画精神与当代审美之间，她以耐心与感受力沉淀出独有的艺术面貌，让古典笔墨在今日依然清澈、生动。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section practice" id="practice" aria-labelledby="practice-title">
+        <div class="section-inner">
+          <div class="practice-head reveal">
+            <div>
+              <p class="section-label">ARTISTIC LANGUAGE</p>
+              <h2 class="section-title" id="practice-title">取法古意<br />自成新境</h2>
+            </div>
+            <p class="practice-note">在细节与气韵、规矩与自由之间，追寻中国画内在的诗性与生命力。</p>
+          </div>
+          <div class="practice-grid reveal">
+            <article class="practice-card">
+              <span class="practice-number">01</span>
+              <h3>宫廷画韵</h3>
+              <p>承接传统笔墨的精谨与秩序，于细微处见精神。</p>
+            </article>
+            <article class="practice-card">
+              <span class="practice-number">02</span>
+              <h3>山水气象</h3>
+              <p>取北宗山水的雄浑阔远，营造可游可居的心灵境界。</p>
+            </article>
+            <article class="practice-card">
+              <span class="practice-number">03</span>
+              <h3>工笔雅致</h3>
+              <p>以细腻的观察和从容的设色，留住万物的生机。</p>
+            </article>
+            <article class="practice-card">
+              <span class="practice-number">04</span>
+              <h3>当代审美</h3>
+              <p>让宋画精神与当下感受相遇，形成鲜明的个人表达。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section timeline" id="timeline" aria-labelledby="timeline-title">
+        <div class="section-inner">
+          <div class="timeline-head reveal">
+            <div>
+              <p class="section-label">SELECTED CHRONOLOGY</p>
+              <h2 class="section-title" id="timeline-title">艺术履历</h2>
+            </div>
+            <p class="timeline-summary">从1997年至今，雨荷持续参与海内外展览、学术交流与艺术活动，以创作回应传统，也以作品连接更广阔的世界。</p>
+          </div>
+
+          <div class="timeline-list reveal">
+            <article class="timeline-item"><div class="timeline-year">1997</div><div class="timeline-event">迎香港回归书画邀请展</div><div class="timeline-detail">参加“中国影视名人中国书画邀请展”。</div></article>
+            <article class="timeline-item"><div class="timeline-year">1999</div><div class="timeline-event">《溪山幽居图》获金奖</div><div class="timeline-detail">在中韩首届书画大赛中获金奖。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2002</div><div class="timeline-event">巴黎学术交流</div><div class="timeline-detail">赴法参与学术探讨，获巴黎美术学院颁发“终身美术系客座讲师”。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2005</div><div class="timeline-event">人民大会堂艺术活动</div><div class="timeline-detail">出席徐悲鸿诞辰110周年座谈会；作品《昙花一现》与《翩若惊鸿宛若游龙》获人民大会堂永久保留。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2007</div><div class="timeline-event">“雅俗共赏”个人大展</div><div class="timeline-detail">于杭州举办个人大展，倡导中国艺术走进千家万户。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2010</div><div class="timeline-event">《牡丹皇后》亮相大拍</div><div class="timeline-detail">以花与美人结合的独创风格亮相艺术市场。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2011</div><div class="timeline-event">巴黎美术顾问与创作</div><div class="timeline-detail">受邀担任巴黎美术学院美术顾问，期间创作工笔作品《醉莲花》。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2014—2017</div><div class="timeline-event">海内外重要展览</div><div class="timeline-detail">参与北京炎黄艺术馆“美丽中国”大型国画展、杭州G20峰会书画邀请展及中韩建交25周年韩国邀请展等。</div></article>
+            <article class="timeline-item"><div class="timeline-year">2023—2024</div><div class="timeline-event">国际艺术交流与新作</div><div class="timeline-detail">获世界华人美术金笔奖、助力国际艺术交流贡献奖；担任2024奥运会艺术顾问。</div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section honors" id="honors" aria-labelledby="honors-title">
+        <div class="section-inner honors-panel reveal">
+          <div>
+            <p class="section-label">HONORS &amp; APPOINTMENTS</p>
+            <h2 class="section-title" id="honors-title">以艺立身<br />以心传承</h2>
+          </div>
+          <ul class="honors-list">
+            <li>首届世界华人美术金笔奖获得者</li>
+            <li>国家一级美术师</li>
+            <li>中国翰林书画院院士</li>
+            <li>中国书画家协会副秘书长</li>
+            <li>中国书画收藏家协会学术委员</li>
+            <li>荣宝斋特聘画家</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section closing" aria-labelledby="closing-title">
+        <div class="section-inner reveal">
+          <div class="closing-mark" aria-hidden="true">雨</div>
+          <h2 id="closing-title">一笔一墨，<br />皆是与万物相望的温柔。</h2>
+          <p>艺术家雨荷 · 中国画、艺术教育与古书画修复</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">雨荷 · YUHE</div>
+        <div class="footer-copy">艺术家资料与履历由艺术家提供 · © <span id="year"></span></div>
+      </div>
+    </footer>
+
+    <script>
+      const menuButton = document.querySelector('.menu-toggle');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+
+      const toggleMenu = (open) => {
+        mobileMenu.classList.toggle('is-open', open);
+        mobileMenu.setAttribute('aria-hidden', String(!open));
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.setAttribute('aria-label', open ? '关闭导航' : '打开导航');
+        document.body.style.overflow = open ? 'hidden' : '';
+      };
+
+      menuButton.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('is-open')));
+      mobileLinks.forEach((link) => link.addEventListener('click', () => toggleMenu(false)));
+
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .12 });
+      reveals.forEach((element) => observer.observe(element));
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
