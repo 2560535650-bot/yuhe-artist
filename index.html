@@ -291,15 +291,15 @@
 
       .hero-signature {
         position: absolute;
-        z-index: 3;
-        right: clamp(30px, 4.5vw, 88px);
-        bottom: clamp(88px, 12vh, 138px);
-        width: clamp(185px, 18vw, 305px);
-        filter: brightness(0) saturate(100%) invert(78%) sepia(42%) saturate(637%) hue-rotate(1deg) brightness(97%) contrast(87%) drop-shadow(0 0 8px rgba(247,213,130,.38));
-        opacity: .94;
+        z-index: 2;
+        right: clamp(24px, 3.4vw, 64px);
+        bottom: clamp(22px, 4.5vh, 54px);
+        width: clamp(145px, 13vw, 225px);
+        filter: brightness(0) saturate(0) invert(96%) drop-shadow(0 0 3px rgba(255,255,255,.1));
+        opacity: .38;
         pointer-events: none;
         transform: rotate(-2deg);
-        animation: signature-glimmer 5.8s ease-in-out infinite;
+        animation: signature-glimmer 14s ease-in-out infinite;
       }
 
       .scroll-cue {
@@ -322,8 +322,8 @@
         50% { background-position: 100% 50%; }
       }
       @keyframes signature-glimmer {
-        0%, 100% { filter: brightness(0) saturate(100%) invert(78%) sepia(42%) saturate(637%) hue-rotate(1deg) brightness(97%) contrast(87%) drop-shadow(0 0 8px rgba(247,213,130,.3)); opacity: .86; }
-        50% { filter: brightness(0) saturate(100%) invert(89%) sepia(49%) saturate(539%) hue-rotate(351deg) brightness(106%) contrast(101%) drop-shadow(0 0 15px rgba(255,224,143,.65)); opacity: 1; }
+        0%, 100% { filter: brightness(0) saturate(0) invert(96%) drop-shadow(0 0 3px rgba(255,255,255,.1)); opacity: .3; }
+        50% { filter: brightness(0) saturate(100%) invert(75%) sepia(21%) saturate(522%) hue-rotate(1deg) brightness(92%) contrast(87%) drop-shadow(0 0 5px rgba(222,191,118,.18)); opacity: .5; }
       }
 
       .section { position: relative; padding: clamp(80px, 10vw, 150px) 5.5vw; }
@@ -539,7 +539,7 @@
         .hero-link { margin-top: 25px; }
         .hero-image-wrap { position: absolute; inset: 0; min-height: 0; }
         .hero-image { object-position: 50% 26%; }
-        .hero-signature { right: 6vw; bottom: 88px; width: min(42vw, 280px); }
+        .hero-signature { right: 6vw; bottom: 42px; width: min(31vw, 210px); }
         .scroll-cue { right: 6vw; bottom: 27px; }
         .intro-grid, .timeline-head, .honors-panel { grid-template-columns: 1fr; gap: 34px; }
         .intro-accent { display: none; }
@@ -566,7 +566,7 @@
         .hero-assurance { padding-left: 14px; }
         .hero-assurance p { font-size: 16px; }
         .hero-assurance p + p { font-size: 14px; }
-        .hero-signature { bottom: 83px; width: 39vw; }
+        .hero-signature { bottom: 36px; width: 30vw; }
         .section { padding-right: 6vw; padding-left: 6vw; }
         .intro-copy > p:first-child { font-size: 19px; }
         .artwork-grid { column-count: 1; }
