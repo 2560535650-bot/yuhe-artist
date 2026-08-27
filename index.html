@@ -7,7 +7,8 @@
       name="description"
       content="艺术家雨荷（肖凤莲）官方网站。探索其以传统宋画精神融汇当代审美的艺术世界。"
     />
-    <link rel="preload" as="image" href="yuhe-portrait.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="yuhe-portrait-mobile.jpg" media="(max-width: 700px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="yuhe-portrait.jpg" media="(min-width: 701px)" fetchpriority="high" />
     <title>雨荷｜艺术家官方网站</title>
     <style>
       :root {
@@ -276,6 +277,7 @@
       .hero-link:hover span { transform: translateX(5px); }
 
       .hero-image-wrap { position: relative; z-index: 0; min-height: 600px; }
+      .hero-image-wrap picture { display: block; width: 100%; height: 100%; }
       .hero-image-wrap::after {
         position: absolute;
         inset: 0;
@@ -633,7 +635,10 @@
           <a class="hero-link" href="#about">走近艺术家 <span>→</span></a>
         </div>
         <div class="hero-image-wrap">
-          <img class="hero-image" src="yuhe-portrait.jpg" alt="艺术家雨荷肖像" width="1024" height="1536" fetchpriority="high" decoding="async" />
+          <picture>
+            <source media="(min-width: 701px)" srcset="yuhe-portrait.jpg" />
+            <img class="hero-image" src="yuhe-portrait-mobile.jpg" alt="艺术家雨荷肖像" width="720" height="1080" fetchpriority="high" decoding="async" />
+          </picture>
         </div>
         <img class="hero-signature" src="assets/yuhe-signature.png" alt="艺术家雨荷签名" width="900" height="475" decoding="async" />
         <div class="scroll-cue" aria-hidden="true">向下阅览</div>
