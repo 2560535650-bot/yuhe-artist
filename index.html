@@ -73,27 +73,32 @@
         width: 39px;
         height: 39px;
         place-items: center;
-        border: 1px solid rgba(255,255,255,.8);
+        border: 1px solid rgba(246,220,157,.9);
+        color: #f7e3ad;
         font-family: var(--serif);
         font-size: 22px;
         letter-spacing: -2px;
       }
 
       .wordmark__name {
+        display: block;
+        background: linear-gradient(108deg, #a66d19 0%, #f9e8b0 27%, #fff8db 48%, #bf8226 69%, #f9e8b0 100%);
+        background-size: 240% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
         font-family: var(--serif);
-        font-size: 20px;
+        font-size: clamp(16px, 1.55vw, 22px);
         font-weight: 600;
-        letter-spacing: .22em;
+        letter-spacing: .13em;
+        line-height: 1.25;
+        text-shadow: 0 0 16px rgba(245,206,121,.18);
+        white-space: nowrap;
+        animation: association-shimmer 9s ease-in-out infinite;
       }
 
       .wordmark__sub {
-        display: block;
-        margin-top: 0;
-        font-family: Georgia, serif;
-        font-size: 9px;
-        font-weight: 400;
-        letter-spacing: .22em;
-        opacity: .78;
+        display: none;
       }
 
       .desktop-nav { display: flex; gap: clamp(18px, 2.4vw, 42px); }
@@ -491,38 +496,77 @@
       .honors-list { display: grid; align-content: start; gap: 0; margin: 5px 0 0; padding: 0; list-style: none; }
       .honors-list li { padding: 13px 0; border-bottom: 1px solid rgba(252,250,245,.27); font-family: var(--serif); font-size: clamp(16px, 1.45vw, 20px); letter-spacing: .04em; }
 
-      .works { background: #eee6d6; }
+      .works { overflow: hidden; background: #eee6d6; }
       .works-head { display: flex; align-items: end; justify-content: space-between; gap: 42px; }
       .works-lede { max-width: 410px; margin: 0 0 6px; color: var(--ink-soft); font-size: 14px; }
-      .work-series { margin-top: clamp(52px, 7vw, 105px); }
-      .work-series + .work-series { margin-top: clamp(65px, 9vw, 136px); border-top: 1px solid var(--line); padding-top: clamp(52px, 7vw, 100px); }
+      .work-series { margin-top: clamp(52px, 7vw, 90px); }
+      .work-series + .work-series { margin-top: clamp(52px, 7vw, 88px); border-top: 1px solid var(--line); padding-top: clamp(48px, 6vw, 76px); }
       .work-series__header { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 30px; }
       .work-series__title { margin: 0; font-family: var(--serif); font-size: clamp(28px, 3.1vw, 44px); font-weight: 500; letter-spacing: .15em; }
-      .work-series__meta { color: var(--vermilion); font-family: Georgia, serif; font-size: 11px; letter-spacing: .15em; }
-      .artwork-grid { column-count: 3; column-gap: 22px; }
+      .work-series__meta { color: var(--vermilion); font-family: Georgia, serif; font-size: 11px; letter-spacing: .15em; white-space: nowrap; }
+      .work-series__hint { margin: 10px 0 0; color: var(--ink-soft); font-size: 11px; letter-spacing: .13em; }
+      .artwork-grid {
+        display: grid;
+        grid-auto-columns: minmax(205px, 250px);
+        grid-auto-flow: column;
+        grid-template-rows: 1fr;
+        gap: 15px;
+        overflow-x: auto;
+        padding: 2px 2px 18px;
+        scroll-padding-inline: 2px;
+        scroll-snap-type: x mandatory;
+        scrollbar-color: rgba(146,105,53,.5) transparent;
+        scrollbar-width: thin;
+        overscroll-behavior-inline: contain;
+        touch-action: pan-x;
+      }
+      .artwork-grid::-webkit-scrollbar { height: 5px; }
+      .artwork-grid::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(146,105,53,.48); }
       .artwork {
-        display: inline-block;
-        width: 100%;
-        margin: 0 0 22px;
+        display: grid;
+        width: auto;
+        margin: 0;
         border: 1px solid rgba(25,54,68,.12);
         background: var(--cloud);
-        break-inside: avoid;
+        grid-template-rows: clamp(220px, 20vw, 280px) auto;
+        scroll-snap-align: start;
         box-shadow: 0 9px 24px rgba(25,54,68,.06);
         overflow: hidden;
       }
-      .artwork img { display: block; width: 100%; height: auto; background: var(--paper-warm); transition: transform .55s ease; }
+      .artwork img { display: block; width: 100%; height: 100%; background: var(--paper-warm); object-fit: contain; transition: transform .55s ease; }
       .artwork:hover img { transform: scale(1.018); }
       .artwork figcaption { padding: 13px 15px 14px; color: var(--ink-soft); font-size: 12px; letter-spacing: .04em; }
+      .special-work { max-width: 860px; margin: clamp(36px, 5vw, 58px) auto 0; }
+      .special-work__header { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin: 0 0 18px; }
+      .special-work__title { margin: 0; color: var(--ink); font-family: var(--serif); font-size: clamp(22px, 2.4vw, 32px); font-weight: 500; letter-spacing: .12em; }
+      .special-work .artwork { grid-template-rows: clamp(155px, 19vw, 235px) auto; }
 
       .closing { background: var(--cloud); text-align: center; }
       .closing-mark { display: grid; width: 67px; height: 67px; margin: 0 auto 32px; place-items: center; border: 1px solid var(--vermilion); color: var(--vermilion); font-family: var(--serif); font-size: 37px; }
       .closing h2 { max-width: 700px; margin: 0 auto; font-family: var(--serif); font-size: clamp(31px, 4.2vw, 59px); font-weight: 500; letter-spacing: .1em; line-height: 1.5; }
       .closing p { max-width: 520px; margin: 27px auto 0; color: var(--ink-soft); font-size: 14px; }
 
-      .site-footer { padding: 28px 5.5vw; color: rgba(252,250,245,.68); background: var(--ink-deep); }
-      .footer-inner { display: flex; width: min(100%, 1320px); margin: 0 auto; align-items: center; justify-content: space-between; gap: 20px; }
-      .footer-brand { font-family: var(--serif); font-size: 17px; letter-spacing: .2em; }
-      .footer-copy { font-size: 11px; letter-spacing: .08em; text-align: right; }
+      .site-footer { padding: 34px 5.5vw; background: var(--ink-deep); }
+      .footer-inner { display: flex; width: min(100%, 1320px); min-height: 44px; margin: 0 auto; align-items: center; justify-content: center; }
+      .footer-association {
+        background: linear-gradient(108deg, #ad7725 0%, #f9e8b0 27%, #fff8dd 48%, #b87e27 69%, #f9e8b0 100%);
+        background-size: 240% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-family: var(--serif);
+        font-size: clamp(19px, 2.2vw, 28px);
+        font-weight: 600;
+        letter-spacing: .16em;
+        text-indent: .16em;
+        text-shadow: 0 0 18px rgba(245,206,121,.18);
+        animation: association-shimmer 9s ease-in-out infinite;
+      }
+
+      @keyframes association-shimmer {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
 
       .reveal { opacity: 0; transform: translateY(25px); transition: opacity .7s ease, transform .7s ease; }
       .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -550,7 +594,9 @@
         .practice-note { margin: 20px 0 0; }
         .works-head { display: block; }
         .works-lede { margin-top: 20px; }
-        .artwork-grid { column-count: 2; }
+        .artwork-grid { grid-auto-columns: minmax(58vw, 330px); }
+        .artwork { grid-template-rows: minmax(275px, 55vw) auto; }
+        .special-work .artwork { grid-template-rows: minmax(150px, 30vw) auto; }
         .practice-grid { grid-template-columns: 1fr 1fr; }
         .practice-card:nth-child(3) { border-left: 1px solid rgba(246,241,230,.22); }
         .timeline-item { grid-template-columns: 75px 1fr; gap: 8px 16px; }
@@ -572,7 +618,10 @@
         .hero-signature { bottom: 36px; width: 30vw; }
         .section { padding-right: 6vw; padding-left: 6vw; }
         .intro-copy > p:first-child { font-size: 19px; }
-        .artwork-grid { column-count: 1; }
+        .work-series__header, .special-work__header { align-items: flex-start; flex-direction: column; gap: 7px; }
+        .artwork-grid { grid-auto-columns: 78vw; gap: 14px; }
+        .artwork { grid-template-rows: minmax(300px, 94vw) auto; }
+        .special-work .artwork { grid-template-rows: minmax(130px, 35vw) auto; }
         .practice-grid { grid-template-columns: 1fr; }
         .practice-card, .practice-card:nth-child(3) { min-height: 225px; border-left: 1px solid rgba(246,241,230,.22); }
         .practice-card h3 { margin-top: 43px; }
@@ -581,8 +630,7 @@
         .timeline-item:hover { margin: 0 -10px; padding-right: 10px; padding-left: 10px; }
         .honors-panel { padding: 42px 28px; }
         .site-footer { padding: 23px 6vw; }
-        .footer-inner { display: block; }
-        .footer-copy { margin-top: 6px; text-align: left; }
+        .footer-association { font-size: 19px; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -594,9 +642,9 @@
   <body>
     <header class="site-header">
       <div class="header-inner">
-        <a class="wordmark" href="#top" aria-label="雨荷首页">
+        <a class="wordmark" href="#top" aria-label="世界华人美术协会首页">
           <span class="wordmark__seal">雨</span>
-          <span class="wordmark__name">雨荷 <span class="wordmark__sub">YUHE · ARTIST</span></span>
+          <span class="wordmark__name">世界华人美术协会 <span class="wordmark__sub">WORLD CHINESE ART ASSOCIATION</span></span>
         </a>
         <nav class="desktop-nav" aria-label="主导航">
           <a href="#about">艺术家</a>
@@ -747,34 +795,59 @@
           <section class="work-series" aria-labelledby="figures-title">
             <div class="work-series__header">
               <h3 class="work-series__title" id="figures-title">人物</h3>
-              <span class="work-series__meta">FIGURE PAINTINGS · 06</span>
+              <span class="work-series__meta">FIGURE PAINTINGS · 13</span>
             </div>
-            <div class="artwork-grid">
-              <figure class="artwork"><img src="assets/works/figures/shengshi-jiaren.jpg" alt="《盛世佳人》人物画作品" width="642" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《盛世佳人》 · 68 × 45 cm</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/figures/yichuang-wangyue.jpg" alt="《倚窗望岳》人物画作品" width="612" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《倚窗望岳》 · 68 × 45 cm</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/figures/jindian-ningfang.jpg" alt="《锦殿凝芳》人物画作品" width="444" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《锦殿凝芳》 · 68 × 138 cm</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/figures/fengque-huazi.jpg" alt="《凤阙华姿》人物画作品" width="447" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《凤阙华姿》 · 68 × 138 cm</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/figures/kangli-qingshen.jpg" alt="《伉俪情深》人物画作品" width="900" height="843" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《伉俪情深》 · 68 × 68 cm</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/figures/shier-huashen.jpg" alt="《十二花神》人物画作品" width="900" height="320" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《十二花神》 · 条屏</figcaption></figure>
+            <p class="work-series__hint">左右滑动阅览作品</p>
+            <div class="artwork-grid" aria-label="人物系列作品横向列表">
+              <figure class="artwork"><img src="assets/works/figures/shengshi-jiaren.jpg" alt="《盛世佳人》人物画作品" width="513" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《盛世佳人》 · 68 × 45 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/yichuang-wangyue.jpg" alt="《倚窗望岳》人物画作品" width="489" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《倚窗望岳》 · 68 × 45 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/jindian-ningfang.jpg" alt="《锦殿凝芳》人物画作品" width="355" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《锦殿凝芳》 · 68 × 138 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/fengque-huazi.jpg" alt="《凤阙华姿》人物画作品" width="357" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《凤阙华姿》 · 68 × 138 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/kangli-qingshen.jpg" alt="《伉俪情深》人物画作品" width="720" height="674" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《伉俪情深》 · 68 × 68 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-01.jpg" alt="人物系列新作一" width="720" height="698" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 01 · 40 × 40 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-02.jpg" alt="人物系列新作二" width="714" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 02 · 40 × 40 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-03.jpg" alt="人物系列新作三" width="715" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 03 · 40 × 40 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-04.jpg" alt="人物系列新作四" width="720" height="716" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 04 · 40 × 40 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-05.jpg" alt="人物系列新作五" width="720" height="708" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 05 · 40 × 40 cm</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-06.jpg" alt="人物系列新作六" width="487" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 06</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-07.jpg" alt="人物系列新作七" width="501" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 07</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/figures/new/figure-new-08.jpg" alt="人物系列新作八" width="467" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>人物系列 · 新作 08</figcaption></figure>
             </div>
           </section>
 
           <section class="work-series" aria-labelledby="landscapes-title">
             <div class="work-series__header">
               <h3 class="work-series__title" id="landscapes-title">山水</h3>
-              <span class="work-series__meta">LANDSCAPE PAINTINGS · 09</span>
+              <span class="work-series__meta">LANDSCAPE PAINTINGS · 18</span>
             </div>
-            <div class="artwork-grid">
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-01.jpg" alt="雨荷山水系列作品一" width="359" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 01</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-02.jpg" alt="雨荷山水系列作品二" width="489" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 02</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-03.jpg" alt="雨荷山水系列作品三" width="900" height="635" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 03</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-04.jpg" alt="雨荷山水系列作品四" width="900" height="633" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 04</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-05.jpg" alt="雨荷山水系列作品五" width="354" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 05</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-06.jpg" alt="雨荷山水系列作品六" width="444" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 06</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-07.jpg" alt="雨荷山水系列作品七" width="900" height="615" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 07</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-08.jpg" alt="雨荷山水系列作品八" width="584" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 08</figcaption></figure>
-              <figure class="artwork"><img src="assets/works/landscapes/landscape-09.jpg" alt="雨荷山水系列作品九" width="501" height="900" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 09</figcaption></figure>
+            <p class="work-series__hint">左右滑动阅览作品</p>
+            <div class="artwork-grid" aria-label="山水系列作品横向列表">
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-01.jpg" alt="雨荷山水系列作品一" width="287" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 01</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-02.jpg" alt="雨荷山水系列作品二" width="391" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 02</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-03.jpg" alt="雨荷山水系列作品三" width="720" height="508" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 03</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-04.jpg" alt="雨荷山水系列作品四" width="720" height="506" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 04</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-05.jpg" alt="雨荷山水系列作品五" width="283" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 05</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-06.jpg" alt="雨荷山水系列作品六" width="355" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 06</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-07.jpg" alt="雨荷山水系列作品七" width="720" height="492" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 07</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-08.jpg" alt="雨荷山水系列作品八" width="467" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 08</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/landscape-09.jpg" alt="雨荷山水系列作品九" width="401" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 作品 09</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-01.jpg" alt="山水系列新作一" width="470" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 01</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-02.jpg" alt="山水系列新作二" width="468" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 02</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-03.jpg" alt="山水系列新作三" width="463" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 03</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-04.jpg" alt="山水系列新作四" width="483" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 04</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-05.jpg" alt="山水系列新作五" width="473" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 05</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-06.jpg" alt="山水系列新作六" width="488" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 06</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-07.jpg" alt="山水系列新作七" width="470" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 07</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-08.jpg" alt="山水系列新作八" width="471" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 08</figcaption></figure>
+              <figure class="artwork"><img src="assets/works/landscapes/new/landscape-new-09.jpg" alt="山水系列新作九" width="489" height="720" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>山水系列 · 新作 09</figcaption></figure>
             </div>
+            <aside class="special-work" aria-labelledby="panorama-title">
+              <div class="special-work__header">
+                <h4 class="special-work__title" id="panorama-title">十二花神 · 条屏</h4>
+                <span class="work-series__meta">SPECIAL PANORAMA</span>
+              </div>
+              <figure class="artwork"><img src="assets/works/figures/shier-huashen.jpg" alt="《十二花神》条屏作品" width="720" height="256" loading="lazy" decoding="async" fetchpriority="low" /><figcaption>《十二花神》 · 条屏</figcaption></figure>
+            </aside>
           </section>
         </div>
       </section>
@@ -790,8 +863,7 @@
 
     <footer class="site-footer">
       <div class="footer-inner">
-        <div class="footer-brand">雨荷 · YUHE</div>
-        <div class="footer-copy">艺术家资料与履历由艺术家提供 · © <span id="year"></span></div>
+        <div class="footer-association">世界华人美术协会</div>
       </div>
     </footer>
 
@@ -822,7 +894,6 @@
       }, { threshold: .12 });
       reveals.forEach((element) => observer.observe(element));
 
-      document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
